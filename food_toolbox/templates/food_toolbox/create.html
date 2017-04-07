@@ -1,0 +1,24 @@
+<h1>Insert new recipe</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'food_toolbox:add_recipe'%}" method="post">
+	{% csrf_token %}
+	{% if ingredients_list %}
+		{% for ingredient in ingredients_list %}	
+		<input type="checkbox" name="ingredient{{ ingredient.id }}" id="{{ ingredient.id }}" value="{{ ingredient.id}}"/>
+		<label for="{{ ingredient.id }}"> {{ ingredient.name }} </label>
+		<input type="text" name="{{ ingredient.id}}" id="quantity{{ ingredient.id }}"/>
+		<br/>
+		{% endfor %}
+	{% endif %}
+	{{ recipe_form.as_p }}
+	<input type="submit" value="Save" />
+</form>
+<form action="{% url 'food_toolbox:add_ingredient'%}" method="post">
+	{% csrf_token %}
+	<p>Add new ingredient:</p>
+	<input type="text" name="ingredient" required/>
+	<input type="submit" value="Add" />
+</form>
+<a href="{% url 'food_toolbox:index'%}">Cancel</a>

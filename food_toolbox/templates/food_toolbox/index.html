@@ -1,0 +1,33 @@
+<div id="navigation">
+	<a href="{% url 'food_toolbox:create'%}">Add a new recipe</a>
+</div>
+<div id="search">
+	<form method="get" action="{% url 'food_toolbox:search'%}">
+		<label for="title_search">Search by title:</label>
+        <input type="text" id="word_search" name="word_search"/>  
+        <input type="submit" value="Show me some recipes!"/>
+        <br/>
+        {% if ingredients_list %}
+		    {% for ingredient in ingredients_list %}
+	        	<input type="checkbox" name="ingredient_{{ ingredient.id }}" id="{{ ingredient.id }}" value="{{ ingredient.id}}"/>
+				<label for="{{ ingredient.id }}"> {{ ingredient.name }} </label>
+				<br/>
+		    {% endfor %}
+		{% endif %}
+		<input type="submit" value="Show me some recipes!"/>
+    </form>
+</div>
+<div id="featured_recipe">
+	<h1>{{ featured_recipe.title_text }}</h1>
+	{% if featured_recipe_ingredients %}
+		<ul>
+		{% for featured_ingredient in featured_recipe_ingredients %}
+			<li>
+				<b>{{ featured_ingredient.ingredient_name.name}}</b> {{ featured_ingredient.ingredient_quantity }}
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+	<img src="{{ featured_recipe.presentation_image_link }}"/>
+	<p>{{ featured_recipe.process_description }}</p>
+</div>

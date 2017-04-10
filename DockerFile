@@ -1,0 +1,11 @@
+FROM ubuntu
+
+MAINTAINER Jasna Jejcic <cyb3r.g@gmail.com>
+
+RUN apt-get update
+
+RUN apt-get install -y python
+RUN apt-get install -y python-pip
+
+RUN pip install --upgrade pip
+RUN pip install django

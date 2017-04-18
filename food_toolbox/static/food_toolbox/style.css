@@ -1,0 +1,11 @@
+#search {
+	display:inline;
+}
+
+#featured_recipe {
+	display:inline;
+}
+
+#featured_recipe img {
+	float:right;
+}

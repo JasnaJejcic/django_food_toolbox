@@ -15,9 +15,6 @@ def index(request):
 
 def featured(request, recipe_id):
 	recipe = get_object_or_404(Recipe, pk=recipe_id)
-	# b = Book.objects.select_related('author__hometown').get(id=4)
-	# p = b.author         # Doesn't hit the database.
-	# c = p.hometown       # Doesn't hit the database.
 	context = {
 			'ingredients_list' : Ingredients_List.objects.order_by('name'),
 			'featured_recipe' : recipe,
@@ -54,12 +51,9 @@ def add_recipe(request):
 
 		for key in request.POST.keys():
 			if key.startswith('ingredient'):
-				# new_recipe.entry_set.create(
-				# 	ingredient_name = Ingredients_List(pk=request.POST[key]),
-				# 	ingredient_quantity = request.POST[request.POST[key]])
 				recipe_ingredient = Recipe_Ingredient()
 				recipe_ingredient.recipe = new_recipe
-				recipe_ingredient.ingredient_name = Ingredients_List(pk=request.POST[key]) # Entry.objects.get(pk=1)
+				recipe_ingredient.ingredient_name = Ingredients_List(pk=request.POST[key])
 				recipe_ingredient.ingredient_quantity = request.POST[request.POST[key]]
 
 				recipe_ingredient.save()
